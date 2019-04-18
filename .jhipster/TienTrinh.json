@@ -1,0 +1,54 @@
+{
+    "name": "TienTrinh",
+    "fields": [
+        {
+            "fieldName": "menuItemCode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "icon",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "tienTrinhXuLy",
+            "otherEntityRelationshipName": "tienTrinh",
+            "relationshipName": "tienTrinhXuLy"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "quyTrinh",
+            "otherEntityRelationshipName": "tienTrinh",
+            "relationshipName": "quyTrinh",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20190418160852",
+    "entityTableName": "tien_trinh",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "quanlyquytrinh"
+    ],
+    "microserviceName": "quanlyquytrinh",
+    "enableEntityAudit": true
+}

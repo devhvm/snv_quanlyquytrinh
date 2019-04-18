@@ -1,0 +1,41 @@
+{
+    "name": "TienTrinhXuLy",
+    "fields": [
+        {
+            "fieldName": "batdauCode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "ketThucCode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "tienTrinh",
+            "otherEntityRelationshipName": "tienTrinhXuLy",
+            "relationshipName": "tienTrinh",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20190418160853",
+    "entityTableName": "tien_trinh_xu_ly",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "quanlyquytrinh"
+    ],
+    "microserviceName": "quanlyquytrinh",
+    "enableEntityAudit": true
+}
