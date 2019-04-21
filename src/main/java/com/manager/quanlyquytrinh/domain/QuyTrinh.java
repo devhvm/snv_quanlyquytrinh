@@ -19,7 +19,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "quy_trinh")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class QuyTrinh extends AbstractAuditingEntity implements Serializable {
+public class QuyTrinh implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
@@ -34,10 +34,6 @@ public class QuyTrinh extends AbstractAuditingEntity implements Serializable {
     @NotNull
     @Column(name = "name", nullable = false)
     private String name;
-
-    @NotNull
-    @Column(name = "icon", nullable = false)
-    private String icon;
 
     @OneToMany(mappedBy = "quyTrinh")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -75,19 +71,6 @@ public class QuyTrinh extends AbstractAuditingEntity implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public QuyTrinh icon(String icon) {
-        this.icon = icon;
-        return this;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
     }
 
     public Set<TienTrinh> getTienTrinhs() {
@@ -142,7 +125,6 @@ public class QuyTrinh extends AbstractAuditingEntity implements Serializable {
             "id=" + getId() +
             ", quyTrinhCode='" + getQuyTrinhCode() + "'" +
             ", name='" + getName() + "'" +
-            ", icon='" + getIcon() + "'" +
             "}";
     }
 }

@@ -20,7 +20,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "tien_trinh")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class TienTrinh extends AbstractAuditingEntity implements Serializable {
+public class TienTrinh implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
@@ -37,8 +37,12 @@ public class TienTrinh extends AbstractAuditingEntity implements Serializable {
     private String name;
 
     @NotNull
-    @Column(name = "icon", nullable = false)
-    private String icon;
+    @Column(name = "screen_code", nullable = false)
+    private String screenCode;
+
+    @NotNull
+    @Column(name = "status", nullable = false)
+    private String status;
 
     @OneToMany(mappedBy = "tienTrinh")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -82,17 +86,30 @@ public class TienTrinh extends AbstractAuditingEntity implements Serializable {
         this.name = name;
     }
 
-    public String getIcon() {
-        return icon;
+    public String getScreenCode() {
+        return screenCode;
     }
 
-    public TienTrinh icon(String icon) {
-        this.icon = icon;
+    public TienTrinh screenCode(String screenCode) {
+        this.screenCode = screenCode;
         return this;
     }
 
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setScreenCode(String screenCode) {
+        this.screenCode = screenCode;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public TienTrinh status(String status) {
+        this.status = status;
+        return this;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Set<TienTrinhXuLy> getTienTrinhXuLies() {
@@ -160,7 +177,8 @@ public class TienTrinh extends AbstractAuditingEntity implements Serializable {
             "id=" + getId() +
             ", menuItemCode='" + getMenuItemCode() + "'" +
             ", name='" + getName() + "'" +
-            ", icon='" + getIcon() + "'" +
+            ", screenCode='" + getScreenCode() + "'" +
+            ", status='" + getStatus() + "'" +
             "}";
     }
 }
