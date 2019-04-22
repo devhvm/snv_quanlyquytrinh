@@ -16,39 +16,29 @@
             ]
         },
         {
-            "fieldName": "icon",
+            "fieldName": "screenCode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "status",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
             ]
         }
     ],
-    "relationships": [
-        {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "tienTrinhXuLy",
-            "otherEntityRelationshipName": "tienTrinh",
-            "relationshipName": "tienTrinhXuLy"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "quyTrinh",
-            "otherEntityRelationshipName": "tienTrinh",
-            "relationshipName": "quyTrinh",
-            "otherEntityField": "name"
-        }
-    ],
+    "relationships": [],
     "changelogDate": "20190418160852",
     "entityTableName": "tien_trinh",
-    "dto": "mapstruct",
-    "pagination": "pagination",
-    "service": "serviceClass",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
     "jpaMetamodelFiltering": false,
     "fluentMethods": true,
-    "clientRootFolder": "",
-    "applications": [
-        "quanlyquytrinh"
-    ],
-    "microserviceName": "quanlyquytrinh",
-    "enableEntityAudit": true
+    "clientRootFolder": "quanlyquytrinh",
+    "applications": "*",
+    "microserviceName": "quanlyquytrinh"
 }
