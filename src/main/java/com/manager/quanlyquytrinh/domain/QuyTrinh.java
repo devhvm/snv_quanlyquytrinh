@@ -35,10 +35,6 @@ public class QuyTrinh extends AbstractAuditingEntity implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @NotNull
-    @Column(name = "icon", nullable = false)
-    private String icon;
-
     @OneToMany(mappedBy = "quyTrinh")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<TienTrinh> tienTrinhs = new HashSet<>();
@@ -75,19 +71,6 @@ public class QuyTrinh extends AbstractAuditingEntity implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public QuyTrinh icon(String icon) {
-        this.icon = icon;
-        return this;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
     }
 
     public Set<TienTrinh> getTienTrinhs() {
@@ -142,7 +125,6 @@ public class QuyTrinh extends AbstractAuditingEntity implements Serializable {
             "id=" + getId() +
             ", quyTrinhCode='" + getQuyTrinhCode() + "'" +
             ", name='" + getName() + "'" +
-            ", icon='" + getIcon() + "'" +
             "}";
     }
 }
