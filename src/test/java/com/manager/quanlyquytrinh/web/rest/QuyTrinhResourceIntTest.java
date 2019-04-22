@@ -49,6 +49,9 @@ public class QuyTrinhResourceIntTest {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
+    private static final String DEFAULT_ICON = "AAAAAAAAAA";
+    private static final String UPDATED_ICON = "BBBBBBBBBB";
+
     @Autowired
     private QuyTrinhRepository quyTrinhRepository;
 
@@ -98,7 +101,8 @@ public class QuyTrinhResourceIntTest {
     public static QuyTrinh createEntity(EntityManager em) {
         QuyTrinh quyTrinh = new QuyTrinh()
             .quyTrinhCode(DEFAULT_QUY_TRINH_CODE)
-            .name(DEFAULT_NAME);
+            .name(DEFAULT_NAME)
+            .icon(DEFAULT_ICON);
         return quyTrinh;
     }
 
@@ -125,6 +129,7 @@ public class QuyTrinhResourceIntTest {
         QuyTrinh testQuyTrinh = quyTrinhList.get(quyTrinhList.size() - 1);
         assertThat(testQuyTrinh.getQuyTrinhCode()).isEqualTo(DEFAULT_QUY_TRINH_CODE);
         assertThat(testQuyTrinh.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testQuyTrinh.getIcon()).isEqualTo(DEFAULT_ICON);
     }
 
     @Test
@@ -187,6 +192,25 @@ public class QuyTrinhResourceIntTest {
 
     @Test
     @Transactional
+    public void checkIconIsRequired() throws Exception {
+        int databaseSizeBeforeTest = quyTrinhRepository.findAll().size();
+        // set the field null
+        quyTrinh.setIcon(null);
+
+        // Create the QuyTrinh, which fails.
+        QuyTrinhDTO quyTrinhDTO = quyTrinhMapper.toDto(quyTrinh);
+
+        restQuyTrinhMockMvc.perform(post("/api/quy-trinhs")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(quyTrinhDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<QuyTrinh> quyTrinhList = quyTrinhRepository.findAll();
+        assertThat(quyTrinhList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllQuyTrinhs() throws Exception {
         // Initialize the database
         quyTrinhRepository.saveAndFlush(quyTrinh);
@@ -197,7 +221,8 @@ public class QuyTrinhResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(quyTrinh.getId().intValue())))
             .andExpect(jsonPath("$.[*].quyTrinhCode").value(hasItem(DEFAULT_QUY_TRINH_CODE.toString())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].icon").value(hasItem(DEFAULT_ICON.toString())));
     }
     
     @Test
@@ -212,7 +237,8 @@ public class QuyTrinhResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(quyTrinh.getId().intValue()))
             .andExpect(jsonPath("$.quyTrinhCode").value(DEFAULT_QUY_TRINH_CODE.toString()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+            .andExpect(jsonPath("$.icon").value(DEFAULT_ICON.toString()));
     }
 
     @Test
@@ -237,7 +263,8 @@ public class QuyTrinhResourceIntTest {
         em.detach(updatedQuyTrinh);
         updatedQuyTrinh
             .quyTrinhCode(UPDATED_QUY_TRINH_CODE)
-            .name(UPDATED_NAME);
+            .name(UPDATED_NAME)
+            .icon(UPDATED_ICON);
         QuyTrinhDTO quyTrinhDTO = quyTrinhMapper.toDto(updatedQuyTrinh);
 
         restQuyTrinhMockMvc.perform(put("/api/quy-trinhs")
@@ -251,6 +278,7 @@ public class QuyTrinhResourceIntTest {
         QuyTrinh testQuyTrinh = quyTrinhList.get(quyTrinhList.size() - 1);
         assertThat(testQuyTrinh.getQuyTrinhCode()).isEqualTo(UPDATED_QUY_TRINH_CODE);
         assertThat(testQuyTrinh.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testQuyTrinh.getIcon()).isEqualTo(UPDATED_ICON);
     }
 
     @Test
