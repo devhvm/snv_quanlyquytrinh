@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * A DTO for the QuyTrinh entity.
  */
-public class QuyTrinhDTO implements Serializable {
+public class QuyTrinhDTO extends AbstractAuditingDTO implements Serializable {
 
     private Long id;
 
@@ -15,6 +15,9 @@ public class QuyTrinhDTO implements Serializable {
 
     @NotNull
     private String name;
+
+    @NotNull
+    private String icon;
 
 
     public Long getId() {
@@ -39,6 +42,14 @@ public class QuyTrinhDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     @Override
@@ -68,6 +79,7 @@ public class QuyTrinhDTO implements Serializable {
             "id=" + getId() +
             ", quyTrinhCode='" + getQuyTrinhCode() + "'" +
             ", name='" + getName() + "'" +
+            ", icon='" + getIcon() + "'" +
             "}";
     }
 }
