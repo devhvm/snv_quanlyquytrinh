@@ -16,9 +16,6 @@ public class QuyTrinhDTO extends AbstractAuditingDTO implements Serializable {
     @NotNull
     private String name;
 
-    @NotNull
-    private String icon;
-
 
     public Long getId() {
         return id;
@@ -42,14 +39,6 @@ public class QuyTrinhDTO extends AbstractAuditingDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
     }
 
     @Override
@@ -79,7 +68,6 @@ public class QuyTrinhDTO extends AbstractAuditingDTO implements Serializable {
             "id=" + getId() +
             ", quyTrinhCode='" + getQuyTrinhCode() + "'" +
             ", name='" + getName() + "'" +
-            ", icon='" + getIcon() + "'" +
             "}";
     }
 }
