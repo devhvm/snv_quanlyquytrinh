@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * A DTO for the TienTrinh entity.
  */
-public class TienTrinhDTO implements Serializable {
+public class TienTrinhDTO extends AbstractAuditingDTO implements Serializable {
 
     private Long id;
 
@@ -17,10 +17,7 @@ public class TienTrinhDTO implements Serializable {
     private String name;
 
     @NotNull
-    private String screenCode;
-
-    @NotNull
-    private String status;
+    private String icon;
 
 
     private Long quyTrinhId;
@@ -51,20 +48,12 @@ public class TienTrinhDTO implements Serializable {
         this.name = name;
     }
 
-    public String getScreenCode() {
-        return screenCode;
+    public String getIcon() {
+        return icon;
     }
 
-    public void setScreenCode(String screenCode) {
-        this.screenCode = screenCode;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public Long getQuyTrinhId() {
@@ -110,8 +99,7 @@ public class TienTrinhDTO implements Serializable {
             "id=" + getId() +
             ", menuItemCode='" + getMenuItemCode() + "'" +
             ", name='" + getName() + "'" +
-            ", screenCode='" + getScreenCode() + "'" +
-            ", status='" + getStatus() + "'" +
+            ", icon='" + getIcon() + "'" +
             ", quyTrinh=" + getQuyTrinhId() +
             ", quyTrinh='" + getQuyTrinhName() + "'" +
             "}";
