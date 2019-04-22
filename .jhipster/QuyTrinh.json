@@ -14,13 +14,6 @@
             "fieldValidateRules": [
                 "required"
             ]
-        },
-        {
-            "fieldName": "icon",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
         }
     ],
     "relationships": [
@@ -38,10 +31,9 @@
     "service": "serviceClass",
     "jpaMetamodelFiltering": false,
     "fluentMethods": true,
-    "clientRootFolder": "",
+    "clientRootFolder": "quanlyquytrinh",
     "applications": [
         "quanlyquytrinh"
     ],
-    "microserviceName": "quanlyquytrinh",
-    "enableEntityAudit": true
+    "microserviceName": "quanlyquytrinh"
 }
