@@ -17,7 +17,10 @@ public class TienTrinhDTO extends AbstractAuditingDTO implements Serializable {
     private String name;
 
     @NotNull
-    private String icon;
+    private String screenCode;
+
+    @NotNull
+    private String status;
 
 
     private Long quyTrinhId;
@@ -48,12 +51,20 @@ public class TienTrinhDTO extends AbstractAuditingDTO implements Serializable {
         this.name = name;
     }
 
-    public String getIcon() {
-        return icon;
+    public String getScreenCode() {
+        return screenCode;
     }
 
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setScreenCode(String screenCode) {
+        this.screenCode = screenCode;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Long getQuyTrinhId() {
@@ -99,7 +110,8 @@ public class TienTrinhDTO extends AbstractAuditingDTO implements Serializable {
             "id=" + getId() +
             ", menuItemCode='" + getMenuItemCode() + "'" +
             ", name='" + getName() + "'" +
-            ", icon='" + getIcon() + "'" +
+            ", screenCode='" + getScreenCode() + "'" +
+            ", status='" + getStatus() + "'" +
             ", quyTrinh=" + getQuyTrinhId() +
             ", quyTrinh='" + getQuyTrinhName() + "'" +
             "}";

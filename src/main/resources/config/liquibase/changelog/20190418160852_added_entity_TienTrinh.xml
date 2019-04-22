@@ -30,7 +30,11 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="icon" type="varchar(255)">
+            <column name="screen_code" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="status" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
 
@@ -44,7 +48,7 @@
     </changeSet>
     
     <!-- Added the entity audit columns -->
-    <changeSet id="20190418161204-audit-1" author="jhipster-entity-audit">
+    <changeSet id="20190422131435-audit-1" author="jhipster-entity-audit">
         <addColumn tableName="tien_trinh">
             <column name="created_by" type="varchar(50)">
                 <constraints nullable="false"/>
