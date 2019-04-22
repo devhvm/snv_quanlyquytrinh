@@ -1,6 +1,8 @@
 package com.manager.quanlyquytrinh.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -8,6 +10,8 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -16,7 +20,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "tien_trinh")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class TienTrinh implements Serializable {
+public class TienTrinh extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
@@ -33,12 +37,15 @@ public class TienTrinh implements Serializable {
     private String name;
 
     @NotNull
-    @Column(name = "screen_code", nullable = false)
-    private String screenCode;
+    @Column(name = "icon", nullable = false)
+    private String icon;
 
-    @NotNull
-    @Column(name = "status", nullable = false)
-    private String status;
+    @OneToMany(mappedBy = "tienTrinh")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<TienTrinhXuLy> tienTrinhXuLies = new HashSet<>();
+    @ManyToOne
+    @JsonIgnoreProperties("tienTrinhs")
+    private QuyTrinh quyTrinh;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -75,30 +82,55 @@ public class TienTrinh implements Serializable {
         this.name = name;
     }
 
-    public String getScreenCode() {
-        return screenCode;
+    public String getIcon() {
+        return icon;
     }
 
-    public TienTrinh screenCode(String screenCode) {
-        this.screenCode = screenCode;
+    public TienTrinh icon(String icon) {
+        this.icon = icon;
         return this;
     }
 
-    public void setScreenCode(String screenCode) {
-        this.screenCode = screenCode;
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
-    public String getStatus() {
-        return status;
+    public Set<TienTrinhXuLy> getTienTrinhXuLies() {
+        return tienTrinhXuLies;
     }
 
-    public TienTrinh status(String status) {
-        this.status = status;
+    public TienTrinh tienTrinhXuLies(Set<TienTrinhXuLy> tienTrinhXuLies) {
+        this.tienTrinhXuLies = tienTrinhXuLies;
         return this;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public TienTrinh addTienTrinhXuLy(TienTrinhXuLy tienTrinhXuLy) {
+        this.tienTrinhXuLies.add(tienTrinhXuLy);
+        tienTrinhXuLy.setTienTrinh(this);
+        return this;
+    }
+
+    public TienTrinh removeTienTrinhXuLy(TienTrinhXuLy tienTrinhXuLy) {
+        this.tienTrinhXuLies.remove(tienTrinhXuLy);
+        tienTrinhXuLy.setTienTrinh(null);
+        return this;
+    }
+
+    public void setTienTrinhXuLies(Set<TienTrinhXuLy> tienTrinhXuLies) {
+        this.tienTrinhXuLies = tienTrinhXuLies;
+    }
+
+    public QuyTrinh getQuyTrinh() {
+        return quyTrinh;
+    }
+
+    public TienTrinh quyTrinh(QuyTrinh quyTrinh) {
+        this.quyTrinh = quyTrinh;
+        return this;
+    }
+
+    public void setQuyTrinh(QuyTrinh quyTrinh) {
+        this.quyTrinh = quyTrinh;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -128,8 +160,7 @@ public class TienTrinh implements Serializable {
             "id=" + getId() +
             ", menuItemCode='" + getMenuItemCode() + "'" +
             ", name='" + getName() + "'" +
-            ", screenCode='" + getScreenCode() + "'" +
-            ", status='" + getStatus() + "'" +
+            ", icon='" + getIcon() + "'" +
             "}";
     }
 }

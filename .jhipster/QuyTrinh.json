@@ -14,17 +14,34 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "icon",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "tienTrinh",
+            "otherEntityRelationshipName": "quyTrinh",
+            "relationshipName": "tienTrinh"
+        }
+    ],
     "changelogDate": "20190418160851",
     "entityTableName": "quy_trinh",
-    "dto": "no",
-    "pagination": "no",
-    "service": "no",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
     "jpaMetamodelFiltering": false,
     "fluentMethods": true,
-    "clientRootFolder": "quanlyquytrinh",
-    "applications": "*",
-    "microserviceName": "quanlyquytrinh"
+    "clientRootFolder": "",
+    "applications": [
+        "quanlyquytrinh"
+    ],
+    "microserviceName": "quanlyquytrinh",
+    "enableEntityAudit": true
 }
