@@ -16,14 +16,7 @@
             ]
         },
         {
-            "fieldName": "screenCode",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "status",
+            "fieldName": "icon",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
@@ -52,9 +45,10 @@
     "service": "serviceClass",
     "jpaMetamodelFiltering": false,
     "fluentMethods": true,
-    "clientRootFolder": "quanlyquytrinh",
+    "clientRootFolder": "",
     "applications": [
         "quanlyquytrinh"
     ],
-    "microserviceName": "quanlyquytrinh"
+    "microserviceName": "quanlyquytrinh",
+    "enableEntityAudit": true
 }
