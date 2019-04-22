@@ -35,6 +35,5 @@
     "applications": [
         "quanlyquytrinh"
     ],
-    "microserviceName": "quanlyquytrinh",
-    "enableEntityAudit": true
+    "microserviceName": "quanlyquytrinh"
 }
