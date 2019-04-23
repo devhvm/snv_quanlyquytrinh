@@ -2,6 +2,7 @@ package com.manager.quanlyquytrinh.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -35,13 +36,13 @@ public class QuyTrinh extends AbstractAuditingEntity implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @NotNull
-    @Column(name = "icon", nullable = false)
-    private String icon;
-
     @OneToMany(mappedBy = "quyTrinh")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<TienTrinh> tienTrinhs = new HashSet<>();
+    @ManyToOne
+    @JsonIgnoreProperties("quyTrinhs")
+    private LoaiQuyTrinh loaiQuyTrinh;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -77,19 +78,6 @@ public class QuyTrinh extends AbstractAuditingEntity implements Serializable {
         this.name = name;
     }
 
-    public String getIcon() {
-        return icon;
-    }
-
-    public QuyTrinh icon(String icon) {
-        this.icon = icon;
-        return this;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
     public Set<TienTrinh> getTienTrinhs() {
         return tienTrinhs;
     }
@@ -113,6 +101,19 @@ public class QuyTrinh extends AbstractAuditingEntity implements Serializable {
 
     public void setTienTrinhs(Set<TienTrinh> tienTrinhs) {
         this.tienTrinhs = tienTrinhs;
+    }
+
+    public LoaiQuyTrinh getLoaiQuyTrinh() {
+        return loaiQuyTrinh;
+    }
+
+    public QuyTrinh loaiQuyTrinh(LoaiQuyTrinh loaiQuyTrinh) {
+        this.loaiQuyTrinh = loaiQuyTrinh;
+        return this;
+    }
+
+    public void setLoaiQuyTrinh(LoaiQuyTrinh loaiQuyTrinh) {
+        this.loaiQuyTrinh = loaiQuyTrinh;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -142,7 +143,6 @@ public class QuyTrinh extends AbstractAuditingEntity implements Serializable {
             "id=" + getId() +
             ", quyTrinhCode='" + getQuyTrinhCode() + "'" +
             ", name='" + getName() + "'" +
-            ", icon='" + getIcon() + "'" +
             "}";
     }
 }

@@ -1,0 +1,40 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="tranminhphuong (generated)" id="1556024221617-1">
+        <addColumn tableName="quy_trinh">
+            <column name="loai_quy_trinh_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="tranminhphuong (generated)" id="1556024221617-2">
+        <addColumn tableName="tien_trinh">
+            <column name="screen_code" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="tranminhphuong (generated)" id="1556024221617-3">
+        <addColumn tableName="tien_trinh">
+            <column name="status" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="tranminhphuong (generated)" id="1556024221617-4">
+        <addForeignKeyConstraint baseColumnNames="loai_quy_trinh_id" baseTableName="quy_trinh" constraintName="FKjs58jyl4m2ew0yyjaruhiq6c7" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="loai_quy_trinh"/>
+    </changeSet>
+    <changeSet author="tranminhphuong (generated)" id="1556024221617-5">
+        <dropColumn columnName="icon" tableName="quy_trinh"/>
+    </changeSet>
+    <changeSet author="tranminhphuong (generated)" id="1556024221617-6">
+        <dropColumn columnName="icon" tableName="tien_trinh"/>
+    </changeSet>
+    <changeSet author="tranminhphuong (generated)" id="1556024221617-7">
+        <dropNotNullConstraint columnDataType="blob" columnName="created_date" tableName="quy_trinh"/>
+    </changeSet>
+    <changeSet author="tranminhphuong (generated)" id="1556024221617-8">
+        <dropNotNullConstraint columnDataType="blob" columnName="created_date" tableName="tien_trinh"/>
+    </changeSet>
+    <changeSet author="tranminhphuong (generated)" id="1556024221617-9">
+        <dropNotNullConstraint columnDataType="blob" columnName="created_date" tableName="tien_trinh_xu_ly"/>
+    </changeSet>
+</databaseChangeLog>

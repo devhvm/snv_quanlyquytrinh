@@ -1,0 +1,45 @@
+{
+    "name": "LoaiQuyTrinh",
+    "fields": [
+        {
+            "fieldName": "loaiQuyTrinhCode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "methodName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "entityName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "serviceName",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "quyTrinh",
+            "otherEntityRelationshipName": "loaiQuyTrinh",
+            "relationshipName": "quyTrinh"
+        }
+    ],
+    "changelogDate": "20190423124835",
+    "entityTableName": "loai_quy_trinh",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "quanlyquytrinh",
+    "applications": [
+        "quanlyquytrinh"
+    ],
+    "microserviceName": "quanlyquytrinh",
+    "enableEntityAudit": true
+}
