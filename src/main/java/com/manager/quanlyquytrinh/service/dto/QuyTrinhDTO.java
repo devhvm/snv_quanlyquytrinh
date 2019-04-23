@@ -1,4 +1,6 @@
 package com.manager.quanlyquytrinh.service.dto;
+import com.manager.quanlyquytrinh.domain.AbstractAuditingEntity;
+
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -6,7 +8,7 @@ import java.util.Objects;
 /**
  * A DTO for the QuyTrinh entity.
  */
-public class QuyTrinhDTO extends AbstractAuditingDTO implements Serializable {
+public class QuyTrinhDTO extends AbstractAuditingEntity implements Serializable {
 
     private Long id;
 
@@ -16,9 +18,10 @@ public class QuyTrinhDTO extends AbstractAuditingDTO implements Serializable {
     @NotNull
     private String name;
 
-    @NotNull
-    private String icon;
 
+    private Long loaiQuyTrinhId;
+
+    private String loaiQuyTrinhName;
 
     public Long getId() {
         return id;
@@ -44,12 +47,20 @@ public class QuyTrinhDTO extends AbstractAuditingDTO implements Serializable {
         this.name = name;
     }
 
-    public String getIcon() {
-        return icon;
+    public Long getLoaiQuyTrinhId() {
+        return loaiQuyTrinhId;
     }
 
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setLoaiQuyTrinhId(Long loaiQuyTrinhId) {
+        this.loaiQuyTrinhId = loaiQuyTrinhId;
+    }
+
+    public String getLoaiQuyTrinhName() {
+        return loaiQuyTrinhName;
+    }
+
+    public void setLoaiQuyTrinhName(String loaiQuyTrinhName) {
+        this.loaiQuyTrinhName = loaiQuyTrinhName;
     }
 
     @Override
@@ -79,7 +90,8 @@ public class QuyTrinhDTO extends AbstractAuditingDTO implements Serializable {
             "id=" + getId() +
             ", quyTrinhCode='" + getQuyTrinhCode() + "'" +
             ", name='" + getName() + "'" +
-            ", icon='" + getIcon() + "'" +
+            ", loaiQuyTrinh=" + getLoaiQuyTrinhId() +
+            ", loaiQuyTrinh='" + getLoaiQuyTrinhName() + "'" +
             "}";
     }
 }
