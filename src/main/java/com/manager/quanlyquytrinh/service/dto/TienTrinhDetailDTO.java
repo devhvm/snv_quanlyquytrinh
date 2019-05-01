@@ -1,7 +1,8 @@
 package com.manager.quanlyquytrinh.service.dto;
+
 import com.manager.quanlyquytrinh.domain.AbstractAuditingEntity;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -9,7 +10,7 @@ import java.util.Objects;
 /**
  * A DTO for the TienTrinh entity.
  */
-public class TienTrinhDTO extends AbstractAuditingEntity implements Serializable {
+public class TienTrinhDetailDTO extends AbstractAuditingEntity implements Serializable {
 
     private Long id;
 
@@ -25,9 +26,12 @@ public class TienTrinhDTO extends AbstractAuditingEntity implements Serializable
     @NotNull
     private String status;
 
+
     private Long quyTrinhId;
 
     private String quyTrinhName;
+
+    private List<TienTrinhXuLyDTO> tienTrinhXuLies;
 
     public Long getId() {
         return id;
@@ -35,14 +39,6 @@ public class TienTrinhDTO extends AbstractAuditingEntity implements Serializable
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getTienTrinhCode() {
-        return tienTrinhCode;
-    }
-
-    public void setTienTrinhCode(String tienTrinhCode) {
-        this.tienTrinhCode = tienTrinhCode;
     }
 
     public String getName() {
@@ -85,6 +81,22 @@ public class TienTrinhDTO extends AbstractAuditingEntity implements Serializable
         this.quyTrinhName = quyTrinhName;
     }
 
+    public String getTienTrinhCode() {
+        return tienTrinhCode;
+    }
+
+    public void setTienTrinhCode(String tienTrinhCode) {
+        this.tienTrinhCode = tienTrinhCode;
+    }
+
+    public List<TienTrinhXuLyDTO> getTienTrinhXuLies() {
+        return tienTrinhXuLies;
+    }
+
+    public void setTienTrinhXuLies(List<TienTrinhXuLyDTO> tienTrinhXuLies) {
+        this.tienTrinhXuLies = tienTrinhXuLies;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -94,7 +106,7 @@ public class TienTrinhDTO extends AbstractAuditingEntity implements Serializable
             return false;
         }
 
-        TienTrinhDTO tienTrinhDTO = (TienTrinhDTO) o;
+        TienTrinhDetailDTO tienTrinhDTO = (TienTrinhDetailDTO) o;
         if (tienTrinhDTO.getId() == null || getId() == null) {
             return false;
         }

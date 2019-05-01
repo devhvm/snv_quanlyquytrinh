@@ -1,5 +1,6 @@
 package com.manager.quanlyquytrinh.web.rest;
 import com.manager.quanlyquytrinh.service.QuyTrinhService;
+import com.manager.quanlyquytrinh.service.dto.QuyTrinhDetailDTO;
 import com.manager.quanlyquytrinh.web.rest.errors.BadRequestAlertException;
 import com.manager.quanlyquytrinh.web.rest.util.HeaderUtil;
 import com.manager.quanlyquytrinh.web.rest.util.PaginationUtil;
@@ -116,5 +117,18 @@ public class QuyTrinhResource {
         log.debug("REST request to delete QuyTrinh : {}", id);
         quyTrinhService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * GET  /quy-trinhs-detail/:id : get the "id" quyTrinh.
+     *
+     * @param id the id of the quyTrinhDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the quyTrinhDTO, or with status 404 (Not Found)
+     */
+    @GetMapping("/quy-trinhs-detail/{id}")
+    public ResponseEntity<QuyTrinhDetailDTO> getQuyTrinhDetail(@PathVariable Long id) {
+        log.debug("REST request to get QuyTrinh detail: {}", id);
+        Optional<QuyTrinhDetailDTO> quyTrinhDetailDTO = quyTrinhService.findDetail(id);
+        return ResponseUtil.wrapOrNotFound(quyTrinhDetailDTO);
     }
 }

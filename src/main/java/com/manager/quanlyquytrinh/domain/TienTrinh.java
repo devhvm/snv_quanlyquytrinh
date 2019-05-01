@@ -1,7 +1,6 @@
 package com.manager.quanlyquytrinh.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -29,8 +28,8 @@ public class TienTrinh extends AbstractAuditingEntity implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "menu_item_code", nullable = false)
-    private String menuItemCode;
+    @Column(name = "tien_trinh_code", nullable = false)
+    private String tienTrinhCode;
 
     @NotNull
     @Column(name = "name", nullable = false)
@@ -60,17 +59,17 @@ public class TienTrinh extends AbstractAuditingEntity implements Serializable {
         this.id = id;
     }
 
-    public String getMenuItemCode() {
-        return menuItemCode;
+    public String getTienTrinhCode() {
+        return tienTrinhCode;
     }
 
-    public TienTrinh menuItemCode(String menuItemCode) {
-        this.menuItemCode = menuItemCode;
+    public TienTrinh tienTrinhCode(String tienTrinhCode) {
+        this.tienTrinhCode = tienTrinhCode;
         return this;
     }
 
-    public void setMenuItemCode(String menuItemCode) {
-        this.menuItemCode = menuItemCode;
+    public void setTienTrinhCode(String tienTrinhCode) {
+        this.tienTrinhCode = tienTrinhCode;
     }
 
     public String getName() {
@@ -175,7 +174,7 @@ public class TienTrinh extends AbstractAuditingEntity implements Serializable {
     public String toString() {
         return "TienTrinh{" +
             "id=" + getId() +
-            ", menuItemCode='" + getMenuItemCode() + "'" +
+            ", tienTrinhCode='" + getTienTrinhCode() + "'" +
             ", name='" + getName() + "'" +
             ", screenCode='" + getScreenCode() + "'" +
             ", status='" + getStatus() + "'" +

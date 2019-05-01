@@ -3,6 +3,8 @@ package com.manager.quanlyquytrinh.service;
 import com.manager.quanlyquytrinh.domain.QuyTrinh;
 import com.manager.quanlyquytrinh.repository.QuyTrinhRepository;
 import com.manager.quanlyquytrinh.service.dto.QuyTrinhDTO;
+import com.manager.quanlyquytrinh.service.dto.QuyTrinhDetailDTO;
+import com.manager.quanlyquytrinh.service.mapper.QuyTrinhDetailMapper;
 import com.manager.quanlyquytrinh.service.mapper.QuyTrinhMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,9 +29,12 @@ public class QuyTrinhService {
 
     private final QuyTrinhMapper quyTrinhMapper;
 
-    public QuyTrinhService(QuyTrinhRepository quyTrinhRepository, QuyTrinhMapper quyTrinhMapper) {
+    private final QuyTrinhDetailMapper quyTrinhDetailMapper;
+
+    public QuyTrinhService(QuyTrinhRepository quyTrinhRepository, QuyTrinhMapper quyTrinhMapper, QuyTrinhDetailMapper quyTrinhDetailMapper) {
         this.quyTrinhRepository = quyTrinhRepository;
         this.quyTrinhMapper = quyTrinhMapper;
+        this.quyTrinhDetailMapper = quyTrinhDetailMapper;
     }
 
     /**
@@ -80,5 +85,19 @@ public class QuyTrinhService {
     public void delete(Long id) {
         log.debug("Request to delete QuyTrinh : {}", id);
         quyTrinhRepository.deleteById(id);
+    }
+
+    /**
+     * Get quyTrinh detail by id.
+     *
+     * @param id the id of the entity
+     * @return the entity
+     */
+    @Transactional(readOnly = true)
+    public Optional<QuyTrinhDetailDTO> findDetail(Long id) {
+        log.debug("Request to get QuyTrinh : {}", id);
+        Optional<QuyTrinh> quiTrinh = quyTrinhRepository.findById(id);
+        return quiTrinh
+            .map(quyTrinhDetailMapper::toDto);
     }
 }

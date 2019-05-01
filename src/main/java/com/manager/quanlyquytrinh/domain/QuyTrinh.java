@@ -43,6 +43,10 @@ public class QuyTrinh extends AbstractAuditingEntity implements Serializable {
     @JsonIgnoreProperties("quyTrinhs")
     private LoaiQuyTrinh loaiQuyTrinh;
 
+    @OneToMany(mappedBy = "tienTrinhXuLies")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<TienTrinh> tienTrinhDetails = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -116,6 +120,15 @@ public class QuyTrinh extends AbstractAuditingEntity implements Serializable {
         this.loaiQuyTrinh = loaiQuyTrinh;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
+
+    public Set<TienTrinh> getTienTrinhDetails() {
+        return tienTrinhDetails;
+    }
+
+    public void setTienTrinhDetails(Set<TienTrinh> tienTrinhDetails) {
+        this.tienTrinhDetails = tienTrinhDetails;
+    }
 
     @Override
     public boolean equals(Object o) {
