@@ -43,8 +43,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = QuanlyquytrinhApp.class)
 public class TienTrinhResourceIntTest {
 
-    private static final String DEFAULT_MENU_ITEM_CODE = "AAAAAAAAAA";
-    private static final String UPDATED_MENU_ITEM_CODE = "BBBBBBBBBB";
+    private static final String DEFAULT_TIEN_TRINH_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_TIEN_TRINH_CODE = "BBBBBBBBBB";
 
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
@@ -103,7 +103,7 @@ public class TienTrinhResourceIntTest {
      */
     public static TienTrinh createEntity(EntityManager em) {
         TienTrinh tienTrinh = new TienTrinh()
-            .menuItemCode(DEFAULT_MENU_ITEM_CODE)
+            .tienTrinhCode(DEFAULT_TIEN_TRINH_CODE)
             .name(DEFAULT_NAME)
             .screenCode(DEFAULT_SCREEN_CODE)
             .status(DEFAULT_STATUS);
@@ -131,7 +131,7 @@ public class TienTrinhResourceIntTest {
         List<TienTrinh> tienTrinhList = tienTrinhRepository.findAll();
         assertThat(tienTrinhList).hasSize(databaseSizeBeforeCreate + 1);
         TienTrinh testTienTrinh = tienTrinhList.get(tienTrinhList.size() - 1);
-        assertThat(testTienTrinh.getMenuItemCode()).isEqualTo(DEFAULT_MENU_ITEM_CODE);
+        assertThat(testTienTrinh.getTienTrinhCode()).isEqualTo(DEFAULT_TIEN_TRINH_CODE);
         assertThat(testTienTrinh.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testTienTrinh.getScreenCode()).isEqualTo(DEFAULT_SCREEN_CODE);
         assertThat(testTienTrinh.getStatus()).isEqualTo(DEFAULT_STATUS);
@@ -159,10 +159,10 @@ public class TienTrinhResourceIntTest {
 
     @Test
     @Transactional
-    public void checkMenuItemCodeIsRequired() throws Exception {
+    public void checkTienTrinhCodeIsRequired() throws Exception {
         int databaseSizeBeforeTest = tienTrinhRepository.findAll().size();
         // set the field null
-        tienTrinh.setMenuItemCode(null);
+        tienTrinh.setTienTrinhCode(null);
 
         // Create the TienTrinh, which fails.
         TienTrinhDTO tienTrinhDTO = tienTrinhMapper.toDto(tienTrinh);
@@ -244,7 +244,7 @@ public class TienTrinhResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(tienTrinh.getId().intValue())))
-            .andExpect(jsonPath("$.[*].menuItemCode").value(hasItem(DEFAULT_MENU_ITEM_CODE.toString())))
+            .andExpect(jsonPath("$.[*].tienTrinhCode").value(hasItem(DEFAULT_TIEN_TRINH_CODE.toString())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].screenCode").value(hasItem(DEFAULT_SCREEN_CODE.toString())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
@@ -261,7 +261,7 @@ public class TienTrinhResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(tienTrinh.getId().intValue()))
-            .andExpect(jsonPath("$.menuItemCode").value(DEFAULT_MENU_ITEM_CODE.toString()))
+            .andExpect(jsonPath("$.tienTrinhCode").value(DEFAULT_TIEN_TRINH_CODE.toString()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.screenCode").value(DEFAULT_SCREEN_CODE.toString()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
@@ -288,7 +288,7 @@ public class TienTrinhResourceIntTest {
         // Disconnect from session so that the updates on updatedTienTrinh are not directly saved in db
         em.detach(updatedTienTrinh);
         updatedTienTrinh
-            .menuItemCode(UPDATED_MENU_ITEM_CODE)
+            .tienTrinhCode(UPDATED_TIEN_TRINH_CODE)
             .name(UPDATED_NAME)
             .screenCode(UPDATED_SCREEN_CODE)
             .status(UPDATED_STATUS);
@@ -303,7 +303,7 @@ public class TienTrinhResourceIntTest {
         List<TienTrinh> tienTrinhList = tienTrinhRepository.findAll();
         assertThat(tienTrinhList).hasSize(databaseSizeBeforeUpdate);
         TienTrinh testTienTrinh = tienTrinhList.get(tienTrinhList.size() - 1);
-        assertThat(testTienTrinh.getMenuItemCode()).isEqualTo(UPDATED_MENU_ITEM_CODE);
+        assertThat(testTienTrinh.getTienTrinhCode()).isEqualTo(UPDATED_TIEN_TRINH_CODE);
         assertThat(testTienTrinh.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testTienTrinh.getScreenCode()).isEqualTo(UPDATED_SCREEN_CODE);
         assertThat(testTienTrinh.getStatus()).isEqualTo(UPDATED_STATUS);

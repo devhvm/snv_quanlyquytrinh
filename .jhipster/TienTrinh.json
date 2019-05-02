@@ -2,7 +2,7 @@
     "name": "TienTrinh",
     "fields": [
         {
-            "fieldName": "menuItemCode",
+            "fieldName": "tienTrinhCode",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
