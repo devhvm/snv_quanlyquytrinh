@@ -1,10 +1,13 @@
 package com.manager.quanlyquytrinh.service;
 
 import com.manager.quanlyquytrinh.domain.QuyTrinh;
+import com.manager.quanlyquytrinh.domain.TienTrinh;
+import com.manager.quanlyquytrinh.domain.TienTrinhXuLy;
 import com.manager.quanlyquytrinh.repository.QuyTrinhRepository;
 import com.manager.quanlyquytrinh.service.dto.QuyTrinhDTO;
 import com.manager.quanlyquytrinh.service.dto.QuyTrinhDetailDTO;
-import com.manager.quanlyquytrinh.service.mapper.QuyTrinhDetailMapper;
+import com.manager.quanlyquytrinh.service.dto.TienTrinhDTO;
+import com.manager.quanlyquytrinh.service.dto.TienTrinhDetailDTO;
 import com.manager.quanlyquytrinh.service.mapper.QuyTrinhMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +17,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Service Implementation for managing QuyTrinh.
@@ -29,12 +35,9 @@ public class QuyTrinhService {
 
     private final QuyTrinhMapper quyTrinhMapper;
 
-    private final QuyTrinhDetailMapper quyTrinhDetailMapper;
-
-    public QuyTrinhService(QuyTrinhRepository quyTrinhRepository, QuyTrinhMapper quyTrinhMapper, QuyTrinhDetailMapper quyTrinhDetailMapper) {
+    public QuyTrinhService(QuyTrinhRepository quyTrinhRepository, QuyTrinhMapper quyTrinhMapper) {
         this.quyTrinhRepository = quyTrinhRepository;
         this.quyTrinhMapper = quyTrinhMapper;
-        this.quyTrinhDetailMapper = quyTrinhDetailMapper;
     }
 
     /**
@@ -94,10 +97,78 @@ public class QuyTrinhService {
      * @return the entity
      */
     @Transactional(readOnly = true)
-    public Optional<QuyTrinhDetailDTO> findDetail(Long id) {
-        log.debug("Request to get QuyTrinh : {}", id);
+    public QuyTrinhDetailDTO findDetails(Long id) {
+        log.debug("Request to get QuyTrinh detail: {}", id);
         Optional<QuyTrinh> quiTrinh = quyTrinhRepository.findById(id);
-        return quiTrinh
-            .map(quyTrinhDetailMapper::toDto);
+        return converToQuyTrinhDetailDto(quiTrinh);
+    }
+
+    private QuyTrinhDetailDTO converToQuyTrinhDetailDto(Optional<QuyTrinh> optionalQuyTrinh) {
+        if ( optionalQuyTrinh == null ) {
+            return null;
+        }
+
+        QuyTrinh quyTrinh = optionalQuyTrinh.get();
+        QuyTrinhDetailDTO quyTrinhDetailDTO = new QuyTrinhDetailDTO();
+        quyTrinhDetailDTO.setId( quyTrinh.getId() );
+        quyTrinhDetailDTO.setQuyTrinhCode( quyTrinh.getQuyTrinhCode() );
+        quyTrinhDetailDTO.setName( quyTrinh.getName() );
+        quyTrinhDetailDTO.setLoaiQuyTrinhId(quyTrinh.getLoaiQuyTrinh().getId());
+        quyTrinhDetailDTO.setMethodName(quyTrinh.getLoaiQuyTrinh().getMethodName());
+        quyTrinhDetailDTO.setEntityName(quyTrinh.getLoaiQuyTrinh().getEntityName());
+
+        List<TienTrinhDetailDTO> tienTrinhXuLys = new ArrayList<>();
+
+        quyTrinh.getTienTrinhs().forEach(
+            tienTrinh -> {
+                TienTrinhDetailDTO tienTrinhDetailDTO = new TienTrinhDetailDTO();
+                tienTrinhDetailDTO.setTienTrinhBatDau(convertToTienTrinhDto(tienTrinh));
+
+                List<TienTrinhDTO> tienTrinhKetThuc = builTienTrinhsKetThuc(tienTrinh.getTienTrinhXuLies(), quyTrinh);
+                tienTrinhDetailDTO.setTienTrinhKetThucs(tienTrinhKetThuc);
+
+                tienTrinhXuLys.add(tienTrinhDetailDTO);
+            }
+        );
+
+        quyTrinhDetailDTO.setTienTrinhXuLys(tienTrinhXuLys);
+        return quyTrinhDetailDTO;
+    }
+
+    private TienTrinhDTO convertToTienTrinhDto(TienTrinh tienTrinh) {
+        if ( tienTrinh == null ) {
+            return null;
+        }
+
+        TienTrinhDTO tienTrinhDTO = new TienTrinhDTO();
+        tienTrinhDTO.setCreatedBy( tienTrinh.getCreatedBy() );
+        tienTrinhDTO.setCreatedDate( tienTrinh.getCreatedDate() );
+        tienTrinhDTO.setLastModifiedBy( tienTrinh.getLastModifiedBy() );
+        tienTrinhDTO.setLastModifiedDate( tienTrinh.getLastModifiedDate() );
+        tienTrinhDTO.setId( tienTrinh.getId() );
+        tienTrinhDTO.setTienTrinhCode( tienTrinh.getTienTrinhCode() );
+        tienTrinhDTO.setName( tienTrinh.getName() );
+        tienTrinhDTO.setScreenCode( tienTrinh.getScreenCode() );
+        tienTrinhDTO.setStatus( tienTrinh.getStatus() );
+
+        return tienTrinhDTO;
+    }
+
+    private List<TienTrinhDTO> builTienTrinhsKetThuc(Set<TienTrinhXuLy> tienTrinhXuLies, QuyTrinh quyTrinh) {
+        List<TienTrinhDTO> tienTrinhsKetThuc = new ArrayList<>();
+        tienTrinhXuLies.forEach(
+            tienTrinhXuLy -> {
+                TienTrinhDTO tientrinhKetThucDTO =
+                    convertToTienTrinhDto(
+                    quyTrinh.getTienTrinhs()
+                    .stream()
+                    .filter(
+                        tienTrinh ->
+                            tienTrinh.getTienTrinhCode().equals(tienTrinhXuLy.getKetThucCode()))
+                    .findFirst().orElse(null));
+                tienTrinhsKetThuc.add(tientrinhKetThucDTO);
+            }
+        );
+        return tienTrinhsKetThuc;
     }
 }
