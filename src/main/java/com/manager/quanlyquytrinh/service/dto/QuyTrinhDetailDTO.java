@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * A DTO for the QuyTrinh entity.
+ * A DTO for the QuyTrinhDetail entity.
  */
-public class QuyTrinhDetailDTO extends AbstractAuditingEntity implements Serializable {
+public class QuyTrinhDetailDTO implements Serializable {
 
     private Long id;
 
@@ -22,9 +22,11 @@ public class QuyTrinhDetailDTO extends AbstractAuditingEntity implements Seriali
 
     private Long loaiQuyTrinhId;
 
-    private String loaiQuyTrinhName;
+    private String methodName;
 
-    private List<TienTrinhDetailDTO> tienTrinhDetails;
+    private String entityName;
+
+    private List<TienTrinhDetailDTO> tienTrinhXuLys;
 
     public Long getId() {
         return id;
@@ -58,51 +60,27 @@ public class QuyTrinhDetailDTO extends AbstractAuditingEntity implements Seriali
         this.loaiQuyTrinhId = loaiQuyTrinhId;
     }
 
-    public String getLoaiQuyTrinhName() {
-        return loaiQuyTrinhName;
+    public String getMethodName() {
+        return methodName;
     }
 
-    public void setLoaiQuyTrinhName(String loaiQuyTrinhName) {
-        this.loaiQuyTrinhName = loaiQuyTrinhName;
+    public void setMethodName(String methodName) {
+        this.methodName = methodName;
     }
 
-    public List<TienTrinhDetailDTO> getTienTrinhDetails() {
-        return tienTrinhDetails;
+    public String getEntityName() {
+        return entityName;
     }
 
-    public void setTienTrinhDetails(List<TienTrinhDetailDTO> tienTrinhDetails) {
-        this.tienTrinhDetails = tienTrinhDetails;
+    public void setEntityName(String entityName) {
+        this.entityName = entityName;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        QuyTrinhDetailDTO quyTrinhDTO = (QuyTrinhDetailDTO) o;
-        if (quyTrinhDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), quyTrinhDTO.getId());
+    public List<TienTrinhDetailDTO> getTienTrinhXuLys() {
+        return tienTrinhXuLys;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(getId());
-    }
-
-    @Override
-    public String toString() {
-        return "QuyTrinhDTO{" +
-            "id=" + getId() +
-            ", quyTrinhCode='" + getQuyTrinhCode() + "'" +
-            ", name='" + getName() + "'" +
-            ", loaiQuyTrinh=" + getLoaiQuyTrinhId() +
-            ", loaiQuyTrinh='" + getLoaiQuyTrinhName() + "'" +
-            "}";
+    public void setTienTrinhXuLys(List<TienTrinhDetailDTO> tienTrinhXuLys) {
+        this.tienTrinhXuLys = tienTrinhXuLys;
     }
 }

@@ -3,8 +3,6 @@ package com.manager.quanlyquytrinh.service;
 import com.manager.quanlyquytrinh.domain.TienTrinh;
 import com.manager.quanlyquytrinh.repository.TienTrinhRepository;
 import com.manager.quanlyquytrinh.service.dto.TienTrinhDTO;
-import com.manager.quanlyquytrinh.service.dto.TienTrinhDetailDTO;
-import com.manager.quanlyquytrinh.service.mapper.TienTrinhDetailMapper;
 import com.manager.quanlyquytrinh.service.mapper.TienTrinhMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,12 +27,9 @@ public class TienTrinhService {
 
     private final TienTrinhMapper tienTrinhMapper;
 
-    private final TienTrinhDetailMapper tienTrinhDetailMapper;
-
-    public TienTrinhService(TienTrinhRepository tienTrinhRepository, TienTrinhMapper tienTrinhMapper, TienTrinhDetailMapper tienTrinhDetailMapper) {
+    public TienTrinhService(TienTrinhRepository tienTrinhRepository, TienTrinhMapper tienTrinhMapper) {
         this.tienTrinhRepository = tienTrinhRepository;
         this.tienTrinhMapper = tienTrinhMapper;
-        this.tienTrinhDetailMapper = tienTrinhDetailMapper;
     }
 
     /**

@@ -90,7 +90,7 @@ spring:
                 enabled: true
 
 server:
-    port: 15052
+    port: 15053
 
 # ===================================================================
 # JHipster specific properties

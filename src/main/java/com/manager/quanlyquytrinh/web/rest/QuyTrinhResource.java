@@ -126,9 +126,9 @@ public class QuyTrinhResource {
      * @return the ResponseEntity with status 200 (OK) and with body the quyTrinhDTO, or with status 404 (Not Found)
      */
     @GetMapping("/quy-trinhs-detail/{id}")
-    public ResponseEntity<QuyTrinhDetailDTO> getQuyTrinhDetail(@PathVariable Long id) {
+    public ResponseEntity<QuyTrinhDetailDTO> getQuyTrinhsDetail(@PathVariable Long id) {
         log.debug("REST request to get QuyTrinh detail: {}", id);
-        Optional<QuyTrinhDetailDTO> quyTrinhDetailDTO = quyTrinhService.findDetail(id);
-        return ResponseUtil.wrapOrNotFound(quyTrinhDetailDTO);
+        QuyTrinhDetailDTO quyTrinhDetailDTO = quyTrinhService.findDetails(id);
+        return ResponseEntity.ok().body(quyTrinhDetailDTO);
     }
 }
