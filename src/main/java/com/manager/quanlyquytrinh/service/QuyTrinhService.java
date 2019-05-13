@@ -91,15 +91,15 @@ public class QuyTrinhService {
     }
 
     /**
-     * Get quyTrinh detail by id.
+     * Get quyTrinh detail by quyTrinhCode.
      *
-     * @param id the id of the entity
+     * @param quyTrinhCode the id of the entity
      * @return the entity
      */
     @Transactional(readOnly = true)
-    public QuyTrinhDetailDTO findDetails(Long id) {
-        log.debug("Request to get QuyTrinh detail: {}", id);
-        Optional<QuyTrinh> quiTrinh = quyTrinhRepository.findById(id);
+    public QuyTrinhDetailDTO findDetails(String quyTrinhCode) {
+        log.debug("Request to get QuyTrinh detail: {}", quyTrinhCode);
+        Optional<QuyTrinh> quiTrinh = quyTrinhRepository.findByQuyTrinhCode(quyTrinhCode);
         return converToQuyTrinhDetailDto(quiTrinh);
     }
 
